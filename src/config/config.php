@@ -20,8 +20,8 @@ return array(
   |
   */
 
-  'username' => '',
-  'token' => '',
-  'version' => null,
-  'http' => null,
+  'username' => 'username',
+  'token' => 'token',
+  //'version' => null,
+  //'http' => null,
 );
