@@ -2,8 +2,8 @@
 
 namespace Onwwward\Textmagic;
 
+use Onwwward\Textmagic\Textmagic;
 use Illuminate\Support\ServiceProvider;
-use Textmagic\Services\TextmagicRestClient;
 
 class TextmagicServiceProvider extends ServiceProvider
 {
@@ -22,7 +22,7 @@ class TextmagicServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('textmagic', function ($app) {
-            return new TextmagicRestClient($app['config']['textmagic']['username'], $app['config']['textmagic']['token']);
+            return new Textmagic($app['config']['textmagic']);
         });
     }
 
