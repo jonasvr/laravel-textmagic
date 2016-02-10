@@ -3,6 +3,8 @@
 namespace Onwwward\Textmagic;
 
 use ReflectionClass;
+use Illuminate\Support\Facades\Log;
+use Textmagic\Services\RestException;
 use Textmagic\Services\TextmagicRestClient;
 
 class Textmagic
@@ -30,28 +32,28 @@ class Textmagic
   }
 
   /**
-   * Calla fucntion on the client instance in order to catch and log any errors.
+   * Call a fucntion on the client instance in order to catch and log any ezceptions.
    * 
    * @param  name $resource [description]
    * @param  name $action   [description]
-   * @param  array  $params   [description]
+   * @param  array $params   [description]
    * @return mixed 
    */
-  public function trigger($resource, $action, $params = [])
+  public function trigger($resource, $action, $params = [], $logLevel = 'warning')
   {
     try {
       return $this->client->{$resource}->$action($params);
     }
-    catch (\Exception $e) {
-        if ($e instanceof RestException) {
-            print '[ERROR] ' . $e->getMessage() . "\n";
-            foreach ($e->getErrors() as $key => $value) {
-                print '[' . $key . '] ' . implode(',', $value) . "\n";
-            }
-        } else {
-            print '[ERROR] ' . $e->getMessage() . "\n";
-        }
-        return;
+    catch (RestException $e) {
+      $message = sprintf('textmagic - %s%s', $e->getMessage(), (empty($e->getErrors()) ? '' : ':'));
+      
+      foreach ($e->getErrors() as $key => $value) {
+        $message .= "\n" . '[' . $key . '] ' . implode(',', $value);
+      }  
+
+      Log::$logLevel($message);
+
+      return false;
     }
   }
 
