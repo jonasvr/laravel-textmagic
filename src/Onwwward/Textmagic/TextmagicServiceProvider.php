@@ -21,8 +21,8 @@ class TextmagicServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('Textmagic', function ($app) {
-            return new TextmagicRestClient($app['config']['textmagic']);
+        $this->app->singleton('textmagic', function ($app) {
+            return new TextmagicRestClient($app['config']['textmagic']['username'], $app['config']['textmagic']['token']);
         });
     }
 
@@ -45,7 +45,7 @@ class TextmagicServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [TextmagicRestClient::class];
+        return ['textmagic'];
     }
 
 }
