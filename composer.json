@@ -1,0 +1,24 @@
+{
+    "name": "onwwward/laravel-textmagic",
+    "description": "Laravel 5 integration of the Textmagic SMS API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Roland Kalocsaven",
+            "email": "rolandka@live.com"
+        }
+    ],
+    "minimum-stability" : "stable",
+	"require": {
+	  "php": ">=5.2.1",
+      "laravel/framework": "~5.0",
+      "textmagic/sdk": "dev-master"
+    },
+    "autoload": {
+      "psr-4":
+      {
+        "Onwwward\\": "src/Onwwward"
+      }
+    }
+}
