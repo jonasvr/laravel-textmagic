@@ -17,7 +17,7 @@
     "autoload": {
       "psr-4":
       {
-        "Onwwward\\": "src/Onwwward"
+        "js0nvr\\": "src/js0nvr"
       }
     }
 }
